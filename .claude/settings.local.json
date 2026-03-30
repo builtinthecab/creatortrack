@@ -27,7 +27,14 @@
       "Bash(git config:*)",
       "Bash(git init:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(winget install:*)",
+      "Bash(grep -v \"^\\\\s*-\\\\s*\\\\|/\\\\s*$\")",
+      "Bash(grep -v \"^$\")",
+      "Bash(where gh:*)",
+      "Bash(cmd /c \"where gh\")",
+      "Bash(GH=\"/c/Program Files/GitHub CLI/gh.exe\")",
+      "Bash(\"$GH\" auth:*)"
     ]
   }
 }
