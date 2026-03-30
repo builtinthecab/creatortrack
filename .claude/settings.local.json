@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(node_modules/.bin/vite build:*)",
+      "Bash(node:*)",
+      "Bash(npx:*)",
+      "Bash(cmd /c \"npm run build\" 2>&1)",
+      "Bash(cmd /c \"cd /d C:\\\\Users\\\\mikel\\\\creatortrack && npm run build\" 2>&1)",
+      "Bash(cmd /c \"cd /d C:\\\\Users\\\\mikel\\\\creatortrack && npm run build 2>&1\")",
+      "Bash(cmd /c \"cd /d C:\\\\Users\\\\mikel\\\\creatortrack && npm.cmd run build\" 2>&1)",
+      "Bash(ls node_modules/.bin/vite*)",
+      "Bash(dir \"C:\\\\Users\\\\mikel\\\\creatortrack\\\\node_modules\\\\.bin\")",
+      "Bash(cmd /c \"dir C:\\\\Users\\\\mikel\\\\creatortrack\\\\node_modules\\\\.bin\" 2>&1)",
+      "Bash(cmd /c \"dir C:\\\\Users\\\\mikel\\\\creatortrack\\\\node_modules\\\\.bin 2>&1\")",
+      "Bash(cmd /c \"dir C:\\\\Users\\\\mikel\\\\creatortrack\\\\node_modules\\\\.bin\")",
+      "Bash(echo \"exit code: $?\")",
+      "Bash(cmd /c \"cd /d C:\\\\Users\\\\mikel\\\\creatortrack && npm install 2>&1\")",
+      "Bash(npm.cmd install:*)",
+      "Bash(npm.cmd cache:*)",
+      "Bash(npm.cmd run:*)",
+      "Read(//c/Users/mikel/.local/share/com.vercel.cli/**)",
+      "Read(//c/Users/mikel/.config/com.vercel.cli/**)",
+      "Read(//c/Users/mikel/**)",
+      "Bash(gh auth:*)",
+      "Bash(git --version)",
+      "Bash(git config:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}
