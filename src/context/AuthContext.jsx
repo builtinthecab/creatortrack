@@ -17,9 +17,11 @@ export function AuthProvider({ children }) {
     }
     try {
       const profile = await db.getProfile(authUser.id)
-      setUser({ id: authUser.id, email: authUser.email, ...profile })
+      // profile may be null if trigger hasn't fired yet — keep session alive with minimal data
+      setUser({ id: authUser.id, email: authUser.email, onboarded: false, ...(profile ?? {}) })
     } catch {
-      setUser(null)
+      // Network or unexpected error — still keep the authenticated session
+      setUser({ id: authUser.id, email: authUser.email, onboarded: false })
     } finally {
       setLoading(false)
     }

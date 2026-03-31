@@ -25,8 +25,14 @@ export default function Signup() {
     if (form.password.length < 6) return setError('Password must be at least 6 characters')
     setLoading(true)
     try {
-      await signup(form.name.trim(), form.email.trim().toLowerCase(), form.password)
-      navigate('/onboarding')
+      const user = await signup(form.name.trim(), form.email.trim().toLowerCase(), form.password)
+      // If session exists immediately (auto-confirm on), go straight to onboarding
+      // If email confirmation is required, user.identities will be empty — show a message
+      if (user?.identities?.length > 0) {
+        navigate('/onboarding')
+      } else {
+        setError('check-email')
+      }
     } catch (err) {
       setError(err.message)
     } finally {
@@ -119,7 +125,11 @@ export default function Signup() {
                   </div>
                 </div>
 
-                {error && (
+                {error === 'check-email' ? (
+                  <div className="p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-lg text-emerald-400 text-sm">
+                    Account created! Check your email and click the confirmation link to sign in.
+                  </div>
+                ) : error && (
                   <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-sm">{error}</div>
                 )}
 

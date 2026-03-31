@@ -18,8 +18,8 @@ export const db = {
       .select('*')
       .eq('id', userId)
       .single()
-    if (error) throw error
-    return data
+    if (error && error.code !== 'PGRST116') throw error
+    return data ?? null
   },
 
   async updateProfile(userId, updates) {
