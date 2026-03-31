@@ -46,18 +46,16 @@ export function AuthProvider({ children }) {
   }, [])
 
   const signup = useCallback(async (name, email, password) => {
-    const { data, error } = await supabase.auth.signUp({ email, password })
-    if (error) throw new Error(error.message)
-
-    // Create profile row
-    const { error: profileError } = await supabase.from('profiles').insert({
-      id: data.user.id,
-      name,
-      platforms: {},
-      onboarded: false,
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: { name },
+        emailRedirectTo: 'https://creatortrack-vert.vercel.app',
+      },
     })
-    if (profileError) throw new Error(profileError.message)
-
+    if (error) throw new Error(error.message)
+    // Profile row is created automatically by the handle_new_user DB trigger
     return data.user
   }, [])
 
