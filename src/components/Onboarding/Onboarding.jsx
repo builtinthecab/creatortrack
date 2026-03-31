@@ -120,12 +120,14 @@ export default function Onboarding() {
   const [platforms, setPlatforms] = useState({})
   const [stats, setStats] = useState({})
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const isLast = step === steps.length - 1
 
   const handleNext = async () => {
     if (step === 1) {
       setLoading(true)
+      setError('')
       try {
         // Normalise values to numbers (empty → 0)
         const normalised = {}
@@ -135,7 +137,7 @@ export default function Onboarding() {
         await completeOnboarding(platforms, normalised)
         setStep(2)
       } catch (err) {
-        console.error('Onboarding error:', err)
+        setError(err.message || 'Something went wrong. Please try again.')
       } finally {
         setLoading(false)
       }
@@ -183,6 +185,12 @@ export default function Onboarding() {
           {step === 0 && <Step1 form={platforms} setForm={setPlatforms} />}
           {step === 1 && <Step2 form={stats} setForm={setStats} />}
           {step === 2 && <Step3 userName={user?.name} />}
+
+          {error && (
+            <div className="mt-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-sm">
+              {error}
+            </div>
+          )}
 
           <div className="flex items-center justify-between mt-8">
             {step > 0 && step < 2 ? (

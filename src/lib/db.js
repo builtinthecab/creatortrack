@@ -33,6 +33,16 @@ export const db = {
     return data
   },
 
+  async upsertProfile(userId, fields) {
+    const { data, error } = await supabase
+      .from('profiles')
+      .upsert({ id: userId, ...fields })
+      .select()
+      .single()
+    if (error) throw error
+    return data
+  },
+
   // ── Stats ──────────────────────────────────────────────────────────────────
 
   async getStats(userId) {

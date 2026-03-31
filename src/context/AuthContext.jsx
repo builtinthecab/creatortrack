@@ -64,8 +64,12 @@ export function AuthProvider({ children }) {
   const completeOnboarding = useCallback(async (platforms, startingStats) => {
     if (!user) return
 
-    // Update profile
-    const updatedProfile = await db.updateProfile(user.id, { platforms, onboarded: true })
+    // Upsert profile — works whether or not the trigger already created the row
+    const updatedProfile = await db.upsertProfile(user.id, {
+      name: user.name || user.email.split('@')[0],
+      platforms,
+      onboarded: true,
+    })
 
     // Seed 30-day history, goals, and starter streak
     const history = generateSeedHistory(startingStats)
