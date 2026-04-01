@@ -94,10 +94,15 @@ function PlatformSection({ platform, values, onChange }) {
   )
 }
 
+// Returns YYYY-MM-DD in the user's local timezone (not UTC)
+function localDateStr(d = new Date()) {
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+}
+
 export default function AddStats() {
   const { user } = useAuth()
   const navigate  = useNavigate()
-  const today     = new Date().toISOString().split('T')[0]
+  const today     = localDateStr()
   const [date, setDate]             = useState(today)
   const [stats, setStats]           = useState({ tiktok: {}, youtube: {}, instagram: {}, gumroad: {} })
   const [saved, setSaved]           = useState(false)
@@ -131,7 +136,10 @@ export default function AddStats() {
 
       if (alsoLogStreak) {
         const existing = await db.getStreak(user.id)
-        const yesterday = new Date(Date.now() - 86_400_000).toISOString().split('T')[0]
+        // Compute yesterday in local time (not UTC) to avoid timezone drift
+        const yd = new Date()
+        yd.setDate(yd.getDate() - 1)
+        const yesterday = localDateStr(yd)
 
         let newCurrent
         if (existing.last_posted === today) {

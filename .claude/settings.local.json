@@ -34,7 +34,15 @@
       "Bash(where gh:*)",
       "Bash(cmd /c \"where gh\")",
       "Bash(GH=\"/c/Program Files/GitHub CLI/gh.exe\")",
-      "Bash(\"$GH\" auth:*)"
+      "Bash(\"$GH\" auth:*)",
+      "Bash(\"/c/Program Files/GitHub CLI/gh.exe\" auth status)",
+      "Bash(\"/c/Program Files/GitHub CLI/gh.exe\" repo create creatortrack --public --source=. --remote=origin --push 2>&1)",
+      "Bash(curl -s \"https://api.supabase.com/v1/organizations\" -H \"Authorization: Bearer sbp_cdcf6f383906f2024fe8fde9809676b9ed7c4cc6\")",
+      "Bash(/dev/null echo:*)",
+      "Bash(curl -s -X GET \"https://api.supabase.com/v1/projects/nbshpkwfooimfqsdzpjd/config/auth\" -H \"Authorization: Bearer sbp_cdcf6f383906f2024fe8fde9809676b9ed7c4cc6\")",
+      "Bash(git push:*)",
+      "WebSearch",
+      "Bash(/tmp/run_migration.mjs:*)"
     ]
   }
 }

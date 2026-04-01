@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
-import { LayoutDashboard, PlusCircle, Target, CreditCard, LogOut, Menu, X, TrendingUp, ChevronDown } from 'lucide-react'
+import { LayoutDashboard, PlusCircle, CreditCard, LogOut, Menu, X, TrendingUp, ChevronDown, Settings } from 'lucide-react'
 
 const navLinks = [
   { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { to: '/add-stats', label: 'Add Stats', icon: PlusCircle },
-  { to: '/pricing', label: 'Pricing', icon: CreditCard },
+  { to: '/settings',  label: 'Connect',   icon: Settings },
+  { to: '/pricing',   label: 'Pricing',   icon: CreditCard },
 ]
 
 export default function Navbar() {

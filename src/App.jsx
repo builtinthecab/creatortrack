@@ -7,6 +7,7 @@ import Dashboard from './components/Dashboard/Dashboard'
 import AddStats from './components/AddStats/AddStats'
 import Pricing from './components/Pricing/Pricing'
 import Navbar from './components/Layout/Navbar'
+import ConnectPlatforms from './components/Settings/ConnectPlatforms'
 import { TrendingUp } from 'lucide-react'
 
 function LoadingScreen() {
@@ -47,6 +48,7 @@ export default function App() {
           <Route path="/onboarding" element={user && !user.onboarded ? <Onboarding /> : <Navigate to="/dashboard" replace />} />
           <Route path="/dashboard"  element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/add-stats"  element={<ProtectedRoute><AddStats /></ProtectedRoute>} />
+          <Route path="/settings"   element={<ProtectedRoute><ConnectPlatforms /></ProtectedRoute>} />
           <Route path="/pricing"    element={<Pricing />} />
           <Route path="*"           element={<Navigate to={user?.onboarded ? '/dashboard' : user ? '/onboarding' : '/login'} replace />} />
         </Routes>
