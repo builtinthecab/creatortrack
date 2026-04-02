@@ -90,11 +90,12 @@ export default function ConnectPlatforms() {
   async function handleSync(platformId) {
     setSyncing(s => ({ ...s, [platformId]: true }))
     try {
+      const { data: { session } } = await supabase.auth.getSession()
       const res = await fetch(`/api/sync/${platformId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${import.meta.env.VITE_CRON_SECRET}`,
+          Authorization: `Bearer ${session.access_token}`,
         },
         body: JSON.stringify({ userId: user.id }),
       })

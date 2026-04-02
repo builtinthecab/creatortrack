@@ -41,16 +41,26 @@ function localDate(d) {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
 }
 
+// Accept either the CRON_SECRET (scheduled jobs) or a valid Supabase user JWT
+async function authorize(req, bodyUserId) {
+  const token = req.headers.authorization?.replace('Bearer ', '')
+  if (!token) return false
+  if (token === process.env.CRON_SECRET) return true
+  // Validate Supabase JWT and confirm it belongs to the requesting user
+  const { data: { user }, error } = await supabase.auth.getUser(token)
+  if (error || !user) return false
+  return user.id === bodyUserId
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end()
 
-  const authHeader = req.headers.authorization?.replace('Bearer ', '')
-  if (authHeader !== process.env.CRON_SECRET) {
-    return res.status(401).json({ error: 'Unauthorized' })
-  }
-
   const { userId } = req.body
   if (!userId) return res.status(400).json({ error: 'Missing userId' })
+
+  if (!(await authorize(req, userId))) {
+    return res.status(401).json({ error: 'Unauthorized' })
+  }
 
   try {
     // Get stored access token

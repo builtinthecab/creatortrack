@@ -14,7 +14,7 @@ const features = [
   { icon: Cloud,     text: 'Cloud sync — your data on every device' },
   { icon: Shield,    text: 'Secure Supabase cloud storage' },
   { icon: Bell,      text: 'Milestone alerts & notifications (coming soon)' },
-  { icon: RefreshCw, text: 'Automated platform data sync (coming soon)' },
+  { icon: RefreshCw, text: 'Automated Gumroad & YouTube sync — no manual entry' },
 ]
 
 const testimonials = [
@@ -27,7 +27,7 @@ const faq = [
   { q: 'Can I cancel anytime?',            a: 'Yes. Cancel from your Stripe billing portal — no questions asked. Your data stays accessible until the end of the billing period.' },
   { q: 'What payment methods are accepted?', a: 'All major credit and debit cards via Stripe. Your payment info never touches our servers.' },
   { q: 'Is there a free trial?',            a: 'Yes — the free plan lets you explore the full dashboard with your data. Upgrade when you\'re ready.' },
-  { q: 'Do you store my platform passwords?', a: 'Never. You manually log your own stats — we store nothing but the numbers you give us.' },
+  { q: 'Do you store my platform passwords?', a: 'Never. OAuth connections use short-lived access tokens granted directly by Gumroad and Google — we never see your passwords. You can revoke access at any time from the Connect page.' },
 ]
 
 export default function Pricing() {
